@@ -15,6 +15,7 @@
 		41425660228955320045FBC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4142565E228955320045FBC8 /* Main.storyboard */; };
 		414256622289553E0045FBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 414256612289553E0045FBC8 /* Assets.xcassets */; };
 		414256652289553E0045FBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414256632289553E0045FBC8 /* LaunchScreen.storyboard */; };
+		4142566D22912C4D0045FBC8 /* map.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4142566C22912C4C0045FBC8 /* map.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		414256612289553E0045FBC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		414256642289553E0045FBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		414256662289553F0045FBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4142566C22912C4C0045FBC8 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				4142565A228955320045FBC8 /* GameScene.swift */,
 				4142565C228955320045FBC8 /* GameViewController.swift */,
 				4142565E228955320045FBC8 /* Main.storyboard */,
+				4142566C22912C4C0045FBC8 /* map.txt */,
 				414256612289553E0045FBC8 /* Assets.xcassets */,
 				414256632289553E0045FBC8 /* LaunchScreen.storyboard */,
 				414256662289553F0045FBC8 /* Info.plist */,
@@ -134,6 +137,7 @@
 				41425660228955320045FBC8 /* Main.storyboard in Resources */,
 				41425657228955320045FBC8 /* GameScene.sks in Resources */,
 				414256622289553E0045FBC8 /* Assets.xcassets in Resources */,
+				4142566D22912C4D0045FBC8 /* map.txt in Resources */,
 				414256652289553E0045FBC8 /* LaunchScreen.storyboard in Resources */,
 				41425659228955320045FBC8 /* Actions.sks in Resources */,
 			);
