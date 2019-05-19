@@ -1,11 +1,15 @@
 
 import SpriteKit
 import GameplayKit
+struct information{
+    var hp:Int
+    var 
+}
+var player = SKSpriteNode(imageNamed:"player")
+var enemy:[SKSpriteNode]=[]
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
     
     override func didMove(to view: SKView) {
         
