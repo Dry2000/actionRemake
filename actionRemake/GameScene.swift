@@ -18,6 +18,8 @@ var rightArrow = SKSpriteNode(imageNamed:"rightArrow")
 var upArrow = SKSpriteNode(imageNamed:"upArrow")
 var oneScale:CGFloat!
 var isJumping:Bool = false
+var isLeft = false
+var isRight = false
 var playerYpos:CGFloat!
 class GameScene: SKScene,SKPhysicsContactDelegate{
     
@@ -78,18 +80,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
                 player.run(jumpSequence)
  */             player.physicsBody?.velocity.dy = oneScale*5
             }
-            let moveLeft = SKAction.move(by:CGVector(dx:10,dy:0), duration:0.5)
             if touchedNode == leftArrow{
-                for i in 0..<map.count{
-                    map[i].run(moveLeft)
-                }
+                isLeft = true
             }
-             let moveRight = SKAction.move(by:CGVector(dx:-10,dy:0), duration: 0.5)
             if touchedNode == rightArrow{
-                for i in 0..<map.count{
-                    map[i].run(moveRight)
-                }
+                isRight = true
             }
+
         }
     
     }
@@ -98,26 +95,24 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             let location = touch.location(in: self)
             let touchedNode = self.atPoint(location)
             
-            let moveLeft = SKAction.move(by:CGVector(dx:10,dy:0), duration: 0.5)
             if touchedNode == leftArrow{
-                for i in 0..<map.count{
-                    map[i].run(moveLeft)
-                }
+                isLeft = true
             }
-            let moveRight = SKAction.move(by:CGVector(dx:-10,dy:0), duration: 0.5)
             if touchedNode == rightArrow{
-                for i in 0..<map.count{
-                    map[i].run(moveRight)
-                }
+               isRight = true
             }
         }
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        isLeft = false
+        isRight = false
     }
     override func update(_ currentTime: TimeInterval) {
         if player.position.y < -frame.height/2{
             isPaused = true
             print("GameOver")
             let gameover = SKLabelNode(text:"Game Over")
-            gameover.fontName = "PixelMplus12-Regular"
+            gameover.fontName = "PixelMplus12-Bold"
             self.addChild(gameover)
         }
         if(player.position.y==playerYpos){
@@ -126,6 +121,18 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             isJumping = true
         }
         playerYpos = player.position.y
+        let moveLeft = SKAction.move(by:CGVector(dx:oneScale/12,dy:0), duration:0.5)
+        if isLeft{
+            for i in 0..<map.count{
+                map[i].run(moveLeft)
+            }
+        }
+        let moveRight = SKAction.move(by:CGVector(dx:-oneScale/12,dy:0), duration: 0.5)
+        if isRight{
+            for i in 0..<map.count{
+                map[i].run(moveRight)
+            }
+        }
     }
    
 }

@@ -17,6 +17,7 @@
 		414256622289553E0045FBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 414256612289553E0045FBC8 /* Assets.xcassets */; };
 		414256652289553E0045FBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414256632289553E0045FBC8 /* LaunchScreen.storyboard */; };
 		4142566D22912C4D0045FBC8 /* map.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4142566C22912C4C0045FBC8 /* map.txt */; };
+		418148DD22B670ED002A13DF /* PixelMplus12-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 418148DC22B670E9002A13DF /* PixelMplus12-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		414256642289553E0045FBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		414256662289553F0045FBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4142566C22912C4C0045FBC8 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
+		418148DC22B670E9002A13DF /* PixelMplus12-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PixelMplus12-Bold.ttf"; path = "../../../../Downloads/PixelMplus-20130602/PixelMplus12-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				4142565A228955320045FBC8 /* GameScene.swift */,
 				4142565C228955320045FBC8 /* GameViewController.swift */,
 				4114823722B48A6300771083 /* PixelMplus12-Regular.ttf */,
+				418148DC22B670E9002A13DF /* PixelMplus12-Bold.ttf */,
 				4142565E228955320045FBC8 /* Main.storyboard */,
 				4142566C22912C4C0045FBC8 /* map.txt */,
 				414256612289553E0045FBC8 /* Assets.xcassets */,
@@ -137,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418148DD22B670ED002A13DF /* PixelMplus12-Bold.ttf in Resources */,
 				4114823822B48A7000771083 /* PixelMplus12-Regular.ttf in Resources */,
 				41425660228955320045FBC8 /* Main.storyboard in Resources */,
 				41425657228955320045FBC8 /* GameScene.sks in Resources */,
