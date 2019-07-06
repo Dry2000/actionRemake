@@ -22,6 +22,7 @@ var isJumping:Bool = false
 var isLeft = false
 var isRight = false
 var playerYpos:CGFloat!
+var restart = SKLabelNode(text:"Continue?")
 class GameScene: SKScene,SKPhysicsContactDelegate{
     
     
@@ -65,8 +66,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         }
         for i in 0..<3{
             let enemy = SKSpriteNode(imageNamed:"\(i)")
-            enemyInfo.append(information(hp:3,inform:2,isJumping:false))
-            enemy.position = CGPoint(x:Int(oneScale)*(5+i),y:Int(oneScale)*(3+i))
+            enemyInfo.append(information(hp:3,inform:0,isJumping:false))
+            enemy.position = CGPoint(x:400,y:0)
             enemy.xScale = oneScale/enemy.frame.width
             enemy.yScale = oneScale/enemy.frame.height
             enemy.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width:enemy.frame.width,height:enemy.frame.height))
@@ -78,31 +79,45 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             }else{
                 enemy.physicsBody?.isDynamic = true
             }
-            let move=SKAction.moveTo(x:-frame.width/2,duration:10.0)
+           /* let move=SKAction.moveTo(x:-frame.width/2,duration:10.0)
+           /* let move = SKAction.run {
+                if isLeft{
+                    SKAction.moveTo(x:-self.frame.width/2,duration:0.2)
+                }
+                else if isRight{
+                    SKAction.moveTo(x:-self.frame.width/2,duration:1.0)
+                }
+                else{
+                    SKAction.moveTo(x:-oneScale/12,duration:2.0)
+                }
+            }*/
             let remove=SKAction.removeFromParent()
-            enemy.run(SKAction.sequence([move,remove]))
+            enemy.run(SKAction.sequence([move,remove]))*/
             enemies.append(enemy)
             self.addChild(enemy)
+            print(enemies[i].position)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let location = touch.location(in: self)
             let touchedNode = self.atPoint(location)
-            print(touchedNode)
+            print(location)
             if touchedNode == upArrow && !isJumping{
             player.physicsBody?.velocity.dy = oneScale*5
             }
-            if touchedNode == leftArrow{
+            else if touchedNode == leftArrow{
                 isLeft = true
             }
-            if touchedNode == rightArrow{
+            else if touchedNode == rightArrow{
                 isRight = true
             }
-
+            else if touchedNode.position == restart.position{
+                conti();
+            }
         }
-    
     }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let location = touch.location(in: self)
@@ -130,9 +145,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == enemyCategory && contact.bodyB.categoryBitMask == playerCategory{
             gameover()
+            return
         }else if contact.bodyB.categoryBitMask == enemyCategory && contact.bodyA.categoryBitMask == playerCategory{
             gameover()
+            return
         }
+        
         if contact.bodyA.categoryBitMask == enemyCategory && contact.bodyB.categoryBitMask == blockCategory{
             for i in 0..<enemies.count{
                 if enemies[i].position == contact.bodyA.node!.position && enemyInfo[i].inform == 2{
@@ -148,12 +166,23 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
         }
     }
     func gameover(){
+        if isPaused{
+            return
+        }
         isPaused = true
         print("GameOver")
         let gameover = SKLabelNode(text:"Game Over")
         gameover.fontName = "PixelMplus12-Bold"
         self.addChild(gameover)
+        restart.position = CGPoint(x:0,y:frame.width/4)
+        restart.fontName = "PixelMplus12-Bold"
+        self.addChild(restart)
     }
+    func conti(){
+        isPaused = false
+        player.position = CGPoint(x:0,y:0)
+        enemies[0].position = CGPoint(x:300,y:0)
+        }
     override func update(_ currentTime: TimeInterval) {
         if player.position.y < -frame.height/2{
             gameover()
@@ -169,19 +198,28 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             for i in 0..<map.count{
                 map[i].run(moveLeft)
             }
+            let moveLeftEnemy = SKAction.move(by:CGVector(dx:oneScale/14,dy:0), duration:0.5)
             for i in 0..<enemies.count{
-                enemies[i].run(moveLeft)
+                enemies[i].run(moveLeftEnemy)
             }
-        }
-        let moveRight = SKAction.move(by:CGVector(dx:-oneScale/12,dy:0), duration: 0.5)
-        if isRight{
+        }else if isRight{
+            let moveRight = SKAction.move(by:CGVector(dx:-oneScale/12,dy:0), duration: 0.5)
             for i in 0..<map.count{
                 map[i].run(moveRight)
             }
+            let moveRightEnemy = SKAction.move(by:CGVector(dx:-oneScale/10,dy:0), duration:0.5)
             for i in 0..<enemies.count{
-                enemies[i].run(moveRight)
+                enemies[i].run(moveRightEnemy)
+               
+            }
+        }else{
+            let move = SKAction.move(by:CGVector(dx:-oneScale/24,dy:0), duration: 0.5)
+            for i in 0..<enemies.count{
+                enemies[i].run(move)
             }
         }
+        
+        
         for i in 0..<enemies.count{
             if enemyInfo[i].inform == 1 && abs(Int(player.position.x - enemies[i].position.x))<Int(oneScale)*2 && !enemyInfo[i].isJumping{
                 enemies[i].physicsBody?.velocity.dy = oneScale*5
