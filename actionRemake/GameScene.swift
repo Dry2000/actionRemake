@@ -64,8 +64,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             addChild(spot)
             map.append(spot)
         }
-        for i in 0..<3{
-            let enemy = SKSpriteNode(imageNamed:"\(i)")
+        for i in 0..<10{
+            let enemytype = UInt(arc4random_uniform(4))
+            let enemy = SKSpriteNode(imageNamed:"\(enemytype)")
             enemyInfo.append(information(hp:3,inform:0,isJumping:false))
             enemy.position = CGPoint(x:400,y:0)
             enemy.xScale = oneScale/enemy.frame.width
@@ -79,20 +80,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             }else{
                 enemy.physicsBody?.isDynamic = true
             }
-           /* let move=SKAction.moveTo(x:-frame.width/2,duration:10.0)
-           /* let move = SKAction.run {
-                if isLeft{
-                    SKAction.moveTo(x:-self.frame.width/2,duration:0.2)
-                }
-                else if isRight{
-                    SKAction.moveTo(x:-self.frame.width/2,duration:1.0)
-                }
-                else{
-                    SKAction.moveTo(x:-oneScale/12,duration:2.0)
-                }
-            }*/
-            let remove=SKAction.removeFromParent()
-            enemy.run(SKAction.sequence([move,remove]))*/
             enemies.append(enemy)
             self.addChild(enemy)
             print(enemies[i].position)
@@ -224,8 +211,12 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
             if enemyInfo[i].inform == 1 && abs(Int(player.position.x - enemies[i].position.x))<Int(oneScale)*2 && !enemyInfo[i].isJumping{
                 enemies[i].physicsBody?.velocity.dy = oneScale*5
             }
-            if enemyInfo[i].inform == 2 && abs(Int(player.position.x - enemies[i].position.x))<Int(oneScale)*2{
+            else if enemyInfo[i].inform == 2 && abs(Int(player.position.x - enemies[i].position.x))<Int(oneScale)*2{
                 enemies[i].physicsBody?.isDynamic = true
+            }
+            else if (enemyInfo[i].inform == 3 && (Int(player.position.x - enemies[i].position.x))<Int(oneScale)*2){
+                enemies[i].position.x = oneScale*3
+                
             }
         }
     }
